@@ -11,6 +11,14 @@ public class PlayerController : MonoBehaviour
     private bool isSprinting;
     private Vector2 gravityDirection = Vector2.down; // Initial gravity direction
 
+    public float timer = 2;
+    private float timer2 = 2;
+    public bool canMove = true;
+
+    private void Start()
+    {
+        timer2 = timer;
+    }
     private void Update()
     {
         // Check for sprint input
@@ -19,33 +27,46 @@ public class PlayerController : MonoBehaviour
         // Calculate current speed based on sprinting
         currentSpeed = isSprinting ? sprintSpeed : walkSpeed;
 
-        // Change gravity direction based on arrow keys
-        ChangeGravityDirection();
-
         // Apply gravity manually
         ApplyGravity();
 
-        // Move the player
         MovePlayer();
-    }
 
+        ChangeGravityDirection();
+    }
     private void ChangeGravityDirection()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (canMove == true)
         {
-            gravityDirection = Vector2.up;
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                gravityDirection = Vector2.up;
+                canMove = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                gravityDirection = Vector2.down;
+                canMove = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                gravityDirection = Vector2.left;
+                canMove = false;
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                gravityDirection = Vector2.right;
+                canMove = false;
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else
         {
-            gravityDirection = Vector2.down;
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            gravityDirection = Vector2.left;
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            gravityDirection = Vector2.right;
+            timer2 -= Time.deltaTime;
+            if(timer2 <= 0)
+            {
+                timer2 = timer;
+                canMove = true;
+            }
         }
     }
 
@@ -60,11 +81,7 @@ public class PlayerController : MonoBehaviour
         float verticalInput = 0f;
 
         // Check if the player is on the ground or on the wall
-        if (gravityDirection == Vector2.down)
-        {
-            horizontalInput = Input.GetAxis("Horizontal");
-        }
-        else if (gravityDirection == Vector2.up)
+        if (gravityDirection == Vector2.down || gravityDirection == Vector2.up)
         {
             horizontalInput = Input.GetAxis("Horizontal");
         }
@@ -91,3 +108,4 @@ public class PlayerController : MonoBehaviour
         transform.Translate(movement);
     }
 }
+

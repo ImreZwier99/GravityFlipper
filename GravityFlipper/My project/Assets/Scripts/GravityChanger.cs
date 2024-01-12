@@ -2,34 +2,40 @@ using UnityEngine;
 
 public class GravityChanger : MonoBehaviour
 {
-    public float gravityScale = 1f; // Adjust this to control the strength of gravity
-
-    void Update()
+    public float gravity = 9.81f;
+    private Vector2 gravityDirection = Vector2.down; // Initial gravity direction
+    private void ChangeGravityDirection()
     {
-        // Get input from arrow keys directly
-        float horizontalInput = Input.GetKey(KeyCode.RightArrow) ? 1 : (Input.GetKey(KeyCode.LeftArrow) ? -1 : 0);
-        float verticalInput = Input.GetKey(KeyCode.UpArrow) ? 1 : (Input.GetKey(KeyCode.DownArrow) ? -1 : 0);
-
-        // Calculate the gravity direction based on input
-        Vector2 gravityDirection = new Vector2(horizontalInput, verticalInput).normalized;
-
-        // Change gravity direction
-        if (gravityDirection != Vector2.zero)
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            SetGravityDirection(gravityDirection);
+            gravityDirection = Vector2.up;
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            gravityDirection = Vector2.down;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            gravityDirection = Vector2.left;
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            gravityDirection = Vector2.right;
         }
     }
 
-    void SetGravityDirection(Vector2 direction)
+    private void ApplyGravity()
     {
-        // Calculate the angle based on the input direction
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Physics2D.gravity = gravity * gravityDirection.normalized;
+    }
 
-        // Set the rotation of the Rigidbody2D to match the calculated angle
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+    public void Update()
+    {
+        // Change gravity direction based on arrow keys
+        ChangeGravityDirection();
 
-        // Set the gravity direction
-        Physics2D.gravity = direction * gravityScale;
+        // Apply gravity manually
+        ApplyGravity();
     }
 }
 
