@@ -574,7 +574,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1157050832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.26, y: -1.71, z: 0}
+  m_LocalPosition: {x: 5.31, y: -1.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1284,6 +1284,7 @@ GameObject:
   - component: {fileID: 1537718089}
   - component: {fileID: 1537718087}
   - component: {fileID: 1537718092}
+  - component: {fileID: 1537718093}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Obstacle
@@ -1392,7 +1393,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537718086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.63, y: -1.8616796, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1420,6 +1421,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1537718093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537718086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b09207f9cf98949a627261b1770c11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveDistancePositive: 2
+  MoveDistanceNegative: -2
+  moveSpeed: 5
 --- !u!1 &1590571782
 GameObject:
   m_ObjectHideFlags: 0
