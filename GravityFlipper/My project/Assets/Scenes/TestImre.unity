@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 1157050833}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1285,6 +1285,7 @@ GameObject:
   - component: {fileID: 1537718087}
   - component: {fileID: 1537718092}
   - component: {fileID: 1537718093}
+  - component: {fileID: 1537718095}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Obstacle
@@ -1436,6 +1437,21 @@ MonoBehaviour:
   MoveDistancePositive: 2
   MoveDistanceNegative: -2
   moveSpeed: 5
+--- !u!114 &1537718095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537718086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b70a9f9a4a14b45974ebeffb13e789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootingRange: 5
+  shootingCooldown: 2
+  projectilePrefab: {fileID: 8860527996776433912, guid: 4ffcb626e1296434ab5c0abdcb21579e, type: 3}
 --- !u!1 &1590571782
 GameObject:
   m_ObjectHideFlags: 0
