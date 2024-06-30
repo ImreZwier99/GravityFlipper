@@ -10,16 +10,24 @@ public class PlayerController : MonoBehaviour
 
     public int lifes = 3;
 
+    private bool isGravityFlipped = false;
+    private Rigidbody2D rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     void Update()
     {
         // Bewegen op de grond
         float horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * moveSpeed * Time.deltaTime);
 
-        // Springen met de spatiebalk
+        // Zwaartekracht omdraaien met pijltje omhoog
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Jump();
+            FlipGravity();
         }
 
         if (lifes <= 0)
@@ -36,9 +44,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Springfunctie
-    private void Jump()
+    // Functie om zwaartekracht om te draaien
+    private void FlipGravity()
     {
-        GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        isGravityFlipped = !isGravityFlipped;
+        rb.gravityScale *= -1;
+
+        // De speler ondersteboven draaien als de zwaartekracht omgedraaid is
+        Vector3 theScale = transform.localScale;
+        theScale.y *= -1;
+        transform.localScale = theScale;
     }
 }
