@@ -7,8 +7,6 @@ TagManager:
   - Ground
   - Object
   - Obstacle
-  - Enemy
-  - Ladder
   layers:
   - Default
   - TransparentFX
