@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// deze enemy schiet projectielen.
-
-
 public class Distance_Enemy : MonoBehaviour
 {
     public float shootingRange = 5f;  // The range at which the enemy starts shooting
     public float shootingCooldown = 2f;  // Cooldown between shots
     public GameObject projectilePrefab;  // The projectile prefab to be shot
+    public float shootAngle = 15f;  // Angle at which projectiles are shot higher
+    public float bulletSpeed = 20f;
 
     private Transform player;  // Reference to the player's transform
     private Vector2 lastKnownPlayerPosition;  // Store the last known player position
@@ -51,7 +50,11 @@ public class Distance_Enemy : MonoBehaviour
         // Calculate the direction from the enemy to the last known player position
         Vector2 direction = (lastKnownPlayerPosition - (Vector2)transform.position).normalized;
 
+        // Add a random offset to the direction vector (slight randomness)
+        float randomAngle = Random.Range(-shootAngle, shootAngle);
+        direction = Quaternion.Euler(0f, 0f, randomAngle) * direction;
+
         // Set the velocity of the projectile to move towards the last known player position
-        projectile.GetComponent<Rigidbody2D>().velocity = direction * 20f;  // Adjust the speed as needed
+        projectile.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;  // Adjust the speed as needed
     }
 }

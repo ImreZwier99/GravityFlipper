@@ -7,6 +7,10 @@ TagManager:
   - Ground
   - Object
   - Obstacle
+  - Enemy
+  - TeleportPoint
+  - Bullet
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -14,9 +18,9 @@ TagManager:
   - groundLayer
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - Bullet
   - 
   - 
   - 
