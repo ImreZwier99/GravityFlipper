@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isGravityFlipped = false;
     private Rigidbody2D rb;
+    private bool facingRight = true; // To track the direction the player is facing
 
     void Start()
     {
@@ -39,6 +40,16 @@ public class PlayerController : MonoBehaviour
         // Bewegen op de grond
         float horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * moveSpeed * Time.deltaTime);
+
+        // Flip the player sprite based on the direction of movement
+        if (horizontalInput > 0 && !facingRight)
+        {
+            Flip();
+        }
+        else if (horizontalInput < 0 && facingRight)
+        {
+            Flip();
+        }
 
         // Zwaartekracht omdraaien met spatiebalk
         if (Input.GetKeyDown(KeyCode.Space))
@@ -109,5 +120,13 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("HealthText reference is missing!");
         }
+    }
+
+    private void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 }
